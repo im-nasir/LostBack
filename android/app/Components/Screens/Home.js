@@ -14,30 +14,29 @@ import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Home = ({ navigation, route }) => {
-
   const [userName, setUserName] = useState('');
   const [profilePic, setProfilePic] = useState('');
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState({});
 
-  const { currentUserId } = route.params; // Get currentUserId from route params
-  const user = currentUserId ? currentUserId : auth().currentUser; // Use currentUserId if available
-
+  const currentUserId = route.params?.currentUserId; // Safely access currentUserId
+  const user = currentUserId ? { uid: currentUserId } : auth().currentUser; // Create a user object
 
   useEffect(() => {
     const fetchUserData = () => {
-      firestore()
-        .collection('users')
-        .doc(user ? user.uid : currentUserId) // Use currentUserId if user is not available
-
-        .onSnapshot((doc) => {
-          if (doc.exists) {
-            const userData = doc.data();
-            setUserName(userData.displayName || 'Guest');
-            setProfilePic(userData.profilePic);
-          }
-        });
+      if (user && user.uid) { // Check if user and user.uid exist
+        firestore()
+          .collection('users')
+          .doc(user.uid)
+          .onSnapshot((doc) => {
+            if (doc.exists) {
+              const userData = doc.data();
+              setUserName(userData.displayName || 'Guest');
+              setProfilePic(userData.profilePic);
+            }
+          });
+      }
     };
 
     fetchUserData();
@@ -58,17 +57,19 @@ const Home = ({ navigation, route }) => {
   }, [user]);
 
   const handleLike = async (postId, likes) => {
-    const isLiked = likes.includes(user.uid);
-    const updatedLikes = isLiked
-      ? likes.filter((id) => id !== user.uid)
-      : [...likes, user.uid];
+    if (user && user.uid) { // Check if user and user.uid exist
+      const isLiked = likes.includes(user.uid);
+      const updatedLikes = isLiked
+        ? likes.filter((id) => id !== user.uid)
+        : [...likes, user.uid];
 
-    try {
-      await firestore().collection('posts').doc(postId).update({
-        likes: updatedLikes,
-      });
-    } catch (error) {
-      console.error('Error updating likes:', error);
+      try {
+        await firestore().collection('posts').doc(postId).update({
+          likes: updatedLikes,
+        });
+      } catch (error) {
+        console.error('Error updating likes:', error);
+      }
     }
   };
 
@@ -110,22 +111,22 @@ const Home = ({ navigation, route }) => {
               <Image source={{ uri: item.image }} style={styles.postImage} />
             </TouchableOpacity>
             <Text style={styles.postTitle}>{item.title}</Text>
+            <Text style={styles.postDescription}>{item.description}</Text>
             <Text style={styles.postLocation}>{item.location}</Text>
             <View style={styles.actions}>
               <TouchableOpacity onPress={() => handleLike(item.id, item.likes || [])}>
                 <Icon
-                  name={item.likes?.includes(user.uid) ? "heart" : "heart-o"}
+                  name={item.likes?.includes(user?.uid) ? "heart" : "heart-o"}
                   size={24}
-                  color={item.likes?.includes(user.uid) ? "#007AFF" : "gray"}
+                  color={item.likes?.includes(user?.uid) ? "#007AFF" : "gray"}
                 />
                 <Text style={styles.likeCount}>{item.likes?.length || 0}</Text>
               </TouchableOpacity>
 
             </View>
-            // Add this button in the Home screen to navigate to the Chat List
-                <TouchableOpacity onPress={() => navigation.navigate('ChatList')}>
-                  <Text style={styles.chatButton}>Go to Chats</Text>
-                </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('ChatList')}>
+              <Text style={styles.chatButton}>Go to Chats</Text>
+            </TouchableOpacity>
           </View>
         )}
         ListEmptyComponent={<Text style={styles.noPosts}>No posts available.</Text>}
@@ -193,6 +194,12 @@ const styles = StyleSheet.create({
   },
   postLocation: {
     fontSize: 14,
+    color: '#777',
+    marginBottom: 10,
+  },
+  postDescription: {
+    fontSize: 14,
+    fontWeight:'semibold',
     color: '#777',
     marginBottom: 10,
   },

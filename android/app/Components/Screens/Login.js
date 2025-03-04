@@ -1,3 +1,6 @@
+
+
+// Login component
 import {
   StyleSheet,
   Text,
@@ -12,7 +15,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth'; // Import Firebase Authentication
-import LineWithText from '../LineWithText';
+import LineWithText from '../LineWithText.js';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -20,21 +23,19 @@ export default function Login() {
   const navigation = useNavigation();
 
   const handleLogin = async () => {
-    if (email.length > 0 && password.length > 0) {
-      try {
-        // Sign in using Firebase
-        await auth().signInWithEmailAndPassword(email, password);
-        Alert.alert('success','Login successful');
-        const user = auth().currentUser; // Get the current user
-        navigation.navigate('Home'); // Navigate to home after login
-
-
-      } catch (error) {
-        console.error(error);
-        Alert.alert('Error','Login failed: ' + error.message); // Show error message
+    if (!email || !password) {
+      Alert.alert('Error', 'Please enter your email and password');
+      return;
+    }
+    try {
+      const userCredential = await auth().signInWithEmailAndPassword(email, password);
+      Alert.alert('Success', 'Login successful');
+      const user = userCredential.user;
+      if (user) {
+        navigation.replace('MainTabs', { currentUserId: user.uid });
       }
-    } else {
-      Alert.alert('Please enter your email and password');
+    } catch (error) {
+      Alert.alert('Error', 'Login failed: ' + error.message);
     }
   };
 
