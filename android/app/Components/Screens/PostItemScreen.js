@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, Alert, Image, TouchableOpacity, Scro
 import { launchImageLibrary } from 'react-native-image-picker';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import PlaceSearch from './PlaceSearch';
 
 const PostItemScreen = ({ navigation }) => {
   const [userName, setUserName] = useState('');
@@ -10,6 +11,7 @@ const PostItemScreen = ({ navigation }) => {
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [image, setImage] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     const user = auth().currentUser;
@@ -93,13 +95,24 @@ const PostItemScreen = ({ navigation }) => {
         />
 
         <Text style={styles.label}>Location</Text>
-        <TextInput
-          style={styles.input}
-          value={location}
-          onChangeText={setLocation}
-          placeholder="Enter location"
-          placeholderTextColor="#888"
+        <TouchableOpacity onPress={() => setShowDropdown(true)}>
+          <TextInput
+            style={styles.input}
+            value={location}
+            placeholder="Select location"
+            placeholderTextColor="#888"
+            editable={false}
+          />
+        </TouchableOpacity>
+        {showDropdown && (
+          <PlaceSearch 
+          onSelectPlace={(place) => {
+            setLocation(place);
+            setShowDropdown(false);
+          }} 
+          country="Pakistan" 
         />
+        )}
       </View>
 
       <View style={styles.imageContainer}>
@@ -123,20 +136,18 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: '#F5F5F5',
     justifyContent: 'center',
-    
-  },heading: {
+  },
+  heading: {
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#8E44AD',
     marginBottom: 16,
-    
     textShadowRadius: 3,
     backgroundColor: '#EDE7F6',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 12,
-    
   },
   label: {
     fontSize: 16,
@@ -203,6 +214,5 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-
 
 export default PostItemScreen;

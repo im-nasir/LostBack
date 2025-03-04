@@ -21,6 +21,7 @@ import Screen2 from '../Screens/Screen2';
 import Screen3 from '../Screens/Screen3';
 import Profile from '../Screens/Profile';
 import ForgetPassword from '../Screens/ForgetPassword';
+// import ChatListScreen from '../Screens/ChatListScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -83,6 +84,7 @@ const Navigation = () => {
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
         <Stack.Screen name="ItemDetails" component={ItemDetailsScreen} />
         <Stack.Screen name="MainTabs" component={TabNavigator} />
+        {/* <Stack.Screen name="ChatListScreen" component={ChatListScreen} /> Add ChatListScreen to Stack Navigator */}
       </Stack.Navigator>
     </NavigationContainer>
   );

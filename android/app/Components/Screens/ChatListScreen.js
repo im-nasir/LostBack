@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
-import { db } from '../Database/FirebaseConfig';
+// import { db } from '../Database/FirebaseConfig';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import auth from '@react-native-firebase/auth';
 

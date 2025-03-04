@@ -111,7 +111,7 @@ const Home = ({ navigation, route }) => {
         <Text style={styles.headerText}>Hi, {userName}</Text>
       </View>
       
-        <TouchableOpacity>
+        <TouchableOpacity >
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
                 <Icon name="paper-plane" size={23} color="#FFF" />
 
@@ -161,9 +161,9 @@ const Home = ({ navigation, route }) => {
                </TouchableOpacity>
 
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('ChatList')}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate('ChatList')}>
               <Text style={styles.chatButton}>Go to Chats</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         )}
         ListEmptyComponent={<Text style={styles.noPosts}>No posts available.</Text>}
