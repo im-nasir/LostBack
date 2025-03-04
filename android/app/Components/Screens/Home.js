@@ -139,12 +139,18 @@ const Home = ({ navigation, route }) => {
                 <Icon
                   name={item.likes?.includes(user?.uid) ? "heart" : "heart-o"}
                   size={24}
-                  color={item.likes?.includes(user?.uid) ? "#007AFF" : "gray"}
+                  color={item.likes?.includes(user?.uid) ? "#8A4FFF" : "#8A4FFF"}
                 />
                 <Text style={styles.likeCount}>{item.likes?.length || 0}</Text>
+                
                 </View>
                 
               </TouchableOpacity>
+              <TouchableOpacity>
+                <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
+                   <Icon name="paper-plane" size={23} color="#8A4FFF" />
+                </View>
+               </TouchableOpacity>
 
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('ChatList')}>
@@ -164,25 +170,36 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#8A4FFF', // No background color
     borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    borderBottomColor: 'rgba(255, 255, 255, 0.2)', // Subtle border
+    backdropFilter: 'blur(15px)', // Blur effect
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 5, // For Android shadow
   },
+
+
   profileImage: {
     width: 40,
     height: 40,
+    borderWidth: 2,
+    borderColor: '#F9F9F9',
     borderRadius: 20,
     marginRight: 10,
   },
   headerText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#F9F9F9',
   },
   postCard: {
     backgroundColor: '#FFF',
-    margin: 10,
-    borderRadius: 10,
+    margin: 4,
+    marginBottom: 10,
+    borderRadius: 4,
     padding: 12,
     shadowColor: '#000',
     shadowOpacity: 0.1,
@@ -217,8 +234,7 @@ const styles = StyleSheet.create({
   },
   postLocation: {
     fontSize: 14,
-    fontWeight:'condensedBold',
-    color: '#777',
+    color: '#000',
     marginBottom: 10,
   },
   postDescription: {
@@ -235,6 +251,7 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: 'row',
     alignItems: 'center',
+    margin: 5,
   },
   likeCount: {
     fontSize: 18,
