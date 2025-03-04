@@ -25,7 +25,10 @@ export default function Login() {
         // Sign in using Firebase
         await auth().signInWithEmailAndPassword(email, password);
         Alert.alert('success','Login successful');
-        navigation.navigate('MainTabs'); // Navigate to the main app flow
+        const user = auth().currentUser; // Get the current user
+        navigation.navigate('Home'); // Navigate to home after login
+
+
       } catch (error) {
         console.error(error);
         Alert.alert('Error','Login failed: ' + error.message); // Show error message
@@ -134,19 +137,19 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginTop: 4,
   },
-  goglButton:{
+  goglButton: {
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     paddingTop: 14,
     paddingBottom: 14,
     width: '80%',
     alignSelf: 'center',
     borderRadius: 12,
     marginTop: 4,
-    borderColor:'lightgrey',
-    borderWidth:1,
+    borderColor: 'lightgrey',
+    borderWidth: 1,
   },
   HeadText: {
     paddingTop: '30%',
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
-    alignItems: 'left',
+    alignItems: 'flex-start', // Fixed
     paddingVertical: 10,
   },
   loginView: {
@@ -177,26 +180,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingBottom: '8%',
   },
   line: {
     flex: 1,
     height: 1,
     backgroundColor: 'lightgrey',
-    alignSelf:'center',
+    alignSelf: 'center',
   },
   text: {
     marginHorizontal: 10,
     fontSize: 16,
     color: 'gray',
   },
-  liineView:{
-    marginLeft:'16',
-    marginRight:'16'
+  liineView: {
+    marginLeft: 16, // Fixed
+    marginRight: 16, // Fixed
   },
   forgotPasswordText: {
     color: '#6200EE',
     textAlign: 'center',
-    marginVertical: 10
+    marginVertical: 10,
   },
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, Button, StyleSheet, ScrollView } from 'react-native';
 
-const ItemDetailsScreen = ({ route }) => {
+const ItemDetailsScreen = ({ route, navigation }) => {
   const { item } = route.params; // Get the item object passed from navigation
 
   return (
@@ -18,7 +18,7 @@ const ItemDetailsScreen = ({ route }) => {
       ) : (
         <Image
           style={styles.image}
-          source={{  uri: item.image ||  'https://via.placeholder.com/150' }}
+          source={{ uri: item.image || 'https://via.placeholder.com/150' }}
         />
       )}
 
@@ -34,6 +34,11 @@ const ItemDetailsScreen = ({ route }) => {
       <Button
         title="Contact Poster"
         onPress={() => alert(`Contacting ${item.userName || 'Anonymous'}`)}
+      />
+      {/* Add this button in the ItemDetails screen to start a chat with the poster */}
+      <Button
+        title="Contact Poster"
+        onPress={() => navigation.navigate('Chat', { chatId: item.id, chatName: item.userName })}
       />
     </ScrollView>
   );

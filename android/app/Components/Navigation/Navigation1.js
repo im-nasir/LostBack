@@ -24,6 +24,7 @@ import Screen3 from '../Screens/Screen3';
 import Profile from '../Screens/Profile';
 import ForgetPassword from '../Screens/ForgetPassword';
 
+
 // Create Stack and Tab Navigators
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -116,7 +117,8 @@ const Navigation = () => {
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
             <Stack.Screen name="ItemDetails" component={ItemDetailsScreen} />
-            <Stack.Screen name="MainTabs" component={TabNavigator} />
+            <Stack.Screen name="MainTabs" component={TabNavigator}  />
+
           </>
         )}
       </Stack.Navigator>

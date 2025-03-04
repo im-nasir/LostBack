@@ -13,20 +13,24 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route }) => {
+
   const [userName, setUserName] = useState('');
   const [profilePic, setProfilePic] = useState('');
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState({});
 
-  const user = auth().currentUser;
+  const { currentUserId } = route.params; // Get currentUserId from route params
+  const user = currentUserId ? currentUserId : auth().currentUser; // Use currentUserId if available
+
 
   useEffect(() => {
     const fetchUserData = () => {
       firestore()
         .collection('users')
-        .doc(user.uid)
+        .doc(user ? user.uid : currentUserId) // Use currentUserId if user is not available
+
         .onSnapshot((doc) => {
           if (doc.exists) {
             const userData = doc.data();
@@ -102,7 +106,9 @@ const Home = ({ navigation }) => {
               />
               <Text style={styles.userName}>{item.userName || 'Anonymous'}</Text>
             </View>
-            <Image source={{ uri: item.image }} style={styles.postImage} />
+            <TouchableOpacity onPress={() => navigation.navigate('ItemDetails', { item })}>
+              <Image source={{ uri: item.image }} style={styles.postImage} />
+            </TouchableOpacity>
             <Text style={styles.postTitle}>{item.title}</Text>
             <Text style={styles.postLocation}>{item.location}</Text>
             <View style={styles.actions}>
@@ -114,7 +120,12 @@ const Home = ({ navigation }) => {
                 />
                 <Text style={styles.likeCount}>{item.likes?.length || 0}</Text>
               </TouchableOpacity>
+
             </View>
+            // Add this button in the Home screen to navigate to the Chat List
+                <TouchableOpacity onPress={() => navigation.navigate('ChatList')}>
+                  <Text style={styles.chatButton}>Go to Chats</Text>
+                </TouchableOpacity>
           </View>
         )}
         ListEmptyComponent={<Text style={styles.noPosts}>No posts available.</Text>}
