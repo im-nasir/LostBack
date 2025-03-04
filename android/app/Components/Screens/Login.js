@@ -1,6 +1,3 @@
-
-
-// Login component
 import {
   StyleSheet,
   Text,
@@ -23,19 +20,21 @@ export default function Login() {
   const navigation = useNavigation();
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      Alert.alert('Error', 'Please enter your email and password');
-      return;
-    }
-    try {
-      const userCredential = await auth().signInWithEmailAndPassword(email, password);
-      Alert.alert('Success', 'Login successful');
-      const user = userCredential.user;
-      if (user) {
-        navigation.replace('MainTabs', { currentUserId: user.uid });
+    if (email.length > 0 && password.length > 0) {
+      try {
+        // Sign in using Firebase
+        await auth().signInWithEmailAndPassword(email, password);
+        Alert.alert('success','Login successful');
+        const user = auth().currentUser; // Get the current user
+navigation.navigate('MainTabs', { currentUserId: user.uid }); // Ensure currentUserId is passed correctly
+
+
+      } catch (error) {
+        console.error(error);
+        Alert.alert('Error','Login failed: ' + error.message); // Show error message
       }
-    } catch (error) {
-      Alert.alert('Error', 'Login failed: ' + error.message);
+    } else {
+      Alert.alert('Please enter your email and password');
     }
   };
 

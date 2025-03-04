@@ -12,6 +12,7 @@ import {
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
+// import moment from 'moment'; // Import moment for date formatting
 
 const Home = ({ navigation, route }) => {
   const [userName, setUserName] = useState('');
@@ -23,6 +24,22 @@ const Home = ({ navigation, route }) => {
   const currentUserId = route.params?.currentUserId; // Safely access currentUserId
   const user = currentUserId ? { uid: currentUserId } : auth().currentUser; // Create a user object
 
+  const formatDate = (dateString) => {
+    if (!dateString) {
+      return 'Unknown';
+    }
+    try {
+      const date = new Date(dateString);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return 'Unknown';
+    }
+  };
+  
   useEffect(() => {
     const fetchUserData = () => {
       if (user && user.uid) { // Check if user and user.uid exist
@@ -112,15 +129,21 @@ const Home = ({ navigation, route }) => {
             </TouchableOpacity>
             <Text style={styles.postTitle}>{item.title}</Text>
             <Text style={styles.postDescription}>{item.description}</Text>
-            <Text style={styles.postLocation}>{item.location}</Text>
-            <View style={styles.actions}>
+            <View style={{justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginRight: 10}}>
+              <Text style={styles.postLocation}>{item.location}</Text>
+              <Text style={styles.date}>{formatDate(item.date)}</Text>  
+            </View>
+              <View style={styles.actions}>
               <TouchableOpacity onPress={() => handleLike(item.id, item.likes || [])}>
+                <View style={{justifyContent:'space-between', flexDirection: 'row', alignItems: 'center'}}>
                 <Icon
                   name={item.likes?.includes(user?.uid) ? "heart" : "heart-o"}
                   size={24}
                   color={item.likes?.includes(user?.uid) ? "#007AFF" : "gray"}
                 />
                 <Text style={styles.likeCount}>{item.likes?.length || 0}</Text>
+                </View>
+                
               </TouchableOpacity>
 
             </View>
@@ -188,18 +211,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   postTitle: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 4,
   },
   postLocation: {
     fontSize: 14,
+    fontWeight:'condensedBold',
     color: '#777',
     marginBottom: 10,
   },
   postDescription: {
     fontSize: 14,
-    fontWeight:'semibold',
+    fontWeight:'500',
+    color: '#777',
+    marginBottom: 10,
+  },
+  postDate: {
+    fontSize: 12,
     color: '#777',
     marginBottom: 10,
   },
@@ -208,7 +237,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   likeCount: {
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight:'bold',
     marginLeft: 6,
   },
   loadingContainer: {
