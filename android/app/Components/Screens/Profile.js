@@ -85,6 +85,7 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
+
       <View style={styles.imageContainer}>
           {/* Profile Picture */}
       <TouchableOpacity onPress={selectImage} style={styles.imageTouchable}>
@@ -144,12 +145,12 @@ const ProfileScreen = () => {
       
       {/* Update Profile Button */}
       <TouchableOpacity style={styles.updateButton} onPress={updateProfile}>
-        <Text style={styles.logoutText}>UPDATE PROFILE</Text>
+        <Text style={styles.buttonText}>UPDATE PROFILE</Text>
       </TouchableOpacity>
 
       {/* Logout Button */}
       <TouchableOpacity style={styles.logoutButton} onPress={logout}>
-        <Text style={styles.logoutText}>Logout</Text>
+        <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity>
     </View>
   );
@@ -170,41 +171,6 @@ const styles = StyleSheet.create({
     borderColor: '#8A4FFF',
     marginBottom: 20,
   },
-  label: {
-    alignSelf: 'flex-start',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  input: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: '#CCCCCC',
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 15,
-    backgroundColor: '#F9F9F9',
-  },
-  logoutButton: {
-    marginTop: 30,
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    backgroundColor: '#FF4D4D',
-    borderRadius: 8,
-  },
-  updateButton:{
-    backgroundColor:'#8A4FFF',
-    marginTop: 0,
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    borderRadius: 8,
-    alignSelf:'center',
-  },
-  logoutText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
   imageOverlayText: {
     position: 'absolute', // Overlay text
     color: '#f3f3f3', // White text for contrast
@@ -218,13 +184,62 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingTop:8,
     justifyContent:'flex-end',
+
+
+    imageContainer: {
+      // position: 'relative', // Enables absolute positioning for children
+      marginTop: 16,
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+    },
   },
-  imageContainer: {
-    // position: 'relative', // Enables absolute positioning for children
-    marginTop: 8,
-    justifyContent: 'flex-end',
+  label: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 5,
+  },
+  input: {
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#DDD',
+    borderRadius: 8,
+    padding: 10,
+    backgroundColor: '#F5F5F5',
+    marginBottom: 15,
+  },
+  logoutButton: {
+    marginTop: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    backgroundColor: '#FF4D4D',
+    borderRadius: 8,
+  },
+  updateButton: {
+    backgroundColor: '#8A4FFF',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  logoutButton: {
+    backgroundColor: '#FF4D4D',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+    width: '100%',
     alignItems: 'center',
   },
+  
+  
   imageTouchable: {
     position: 'relative', // Enables absolute positioning for children
     width: 120, // Diameter of the circle
@@ -233,12 +248,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden', // Ensures children stay within the circle
   },
   inputContainer:{
-    alignSelf:'center',
-    padding:12,
-    marginTop:'15%',
-    marginBottom:'10%',
-    backgroundColor:'#F3F3F3',
-    width:'100%'
+    width: '100%',
+    padding: 15,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    elevation: 3,
+    marginTop:20,
+    marginBottom: 20,
   }
 });
 

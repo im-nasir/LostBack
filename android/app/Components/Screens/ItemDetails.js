@@ -7,8 +7,8 @@ const ItemDetailsScreen = ({ route, navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* Item Images */}
-      {item.images && item.images.length > 0 ? (
-        item.images.map((imageUri, index) => (
+      {item.imageUrls && item.imageUrls.length > 0 ? (
+        item.imageUrls.map((imageUri, index) => (
           <Image
             key={index}
             style={styles.image}

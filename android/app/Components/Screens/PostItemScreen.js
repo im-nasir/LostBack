@@ -70,11 +70,17 @@ const PostItemScreen = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.heading}>Post an Item</Text>
+      <Text style={styles.heading}>POST AN ITEM</Text>
 
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Title</Text>
-        <TextInput style={styles.input} value={title} onChangeText={setTitle} placeholder="Enter item title" />
+        <TextInput
+          style={styles.input}
+          value={title}
+          onChangeText={setTitle}
+          placeholder="Enter item title"
+          placeholderTextColor="#888"
+        />
 
         <Text style={styles.label}>Description</Text>
         <TextInput
@@ -82,11 +88,18 @@ const PostItemScreen = ({ navigation }) => {
           value={description}
           onChangeText={setDescription}
           placeholder="Enter item description"
+          placeholderTextColor="#888"
           multiline
         />
 
         <Text style={styles.label}>Location</Text>
-        <TextInput style={styles.input} value={location} onChangeText={setLocation} placeholder="Enter location" />
+        <TextInput
+          style={styles.input}
+          value={location}
+          onChangeText={setLocation}
+          placeholder="Enter location"
+          placeholderTextColor="#888"
+        />
       </View>
 
       <View style={styles.imageContainer}>
@@ -105,30 +118,91 @@ const PostItemScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flexGrow: 1, padding: 10, backgroundColor: '#FFFFFF', justifyContent: 'center' },
-  heading: { fontSize: 26, fontWeight: 'bold', textAlign: 'center',alignItems:'flex-start' , marginBottom: 40, color: '#333' },
-  label: { fontSize: 16, fontWeight: 'bold', marginBottom: 6, color: '#555' },
-  inputContainer: { backgroundColor: '#F3F3F3', padding: 16, borderRadius: 10, marginBottom: 20 },
-  input: { borderColor: 'gray', borderWidth: 1, borderRadius: 8, padding: 10, marginBottom: 12, backgroundColor: '#FFF' },
-  textArea: { height: 80, textAlignVertical: 'top' },
-  imageContainer: { backgroundColor: '#F3F3F3', padding: 16, borderRadius: 10, marginBottom: 20 },
-  imageInputBox: {
-    borderColor: 'gray',
+  container: {
+    flexGrow: 1,
+    padding: 8,
+    backgroundColor: '#F5F5F5',
+    justifyContent: 'center',
+    
+  },heading: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#8E44AD',
+    marginBottom: 16,
+    
+    textShadowRadius: 3,
+    backgroundColor: '#EDE7F6',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 6,
+    color: '#34495E',
+  },
+  inputContainer: {
+    backgroundColor: '#FFFFFF',
+    padding: 18,
+    borderRadius: 10,
+    marginBottom: 20,
+    elevation: 3,
+  },
+  input: {
+    borderColor: '#BDC3C7',
     borderWidth: 1,
     borderRadius: 8,
     padding: 12,
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    marginBottom: 12,
+    backgroundColor: '#F9F9F9',
+    color: '#2C3E50',
   },
-  imageInputText: { color: '#555', fontSize: 16 },
-  selectedImage: { width: '100%', height: 250, borderRadius: 8, marginTop: 12 },
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  imageContainer: {
+    backgroundColor: '#FFFFFF',
+    padding: 18,
+    borderRadius: 10,
+    marginBottom: 20,
+    elevation: 3,
+  },
+  imageInputBox: {
+    borderColor: '#BDC3C7',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 14,
+    alignItems: 'center',
+    backgroundColor: '#ECF0F1',
+  },
+  imageInputText: {
+    color: '#34495E',
+    fontSize: 16,
+  },
+  selectedImage: {
+    width: '100%',
+    height: 220,
+    borderRadius: 8,
+    marginTop: 12,
+    resizeMode: 'cover',
+  },
   submitButton: {
-    backgroundColor: '#8A4FFF',
-    paddingVertical: 14,
+    backgroundColor: '#8E44AD',
+    paddingVertical: 16,
     borderRadius: 8,
     alignItems: 'center',
+    marginTop: 20,
   },
-  submitButtonText: { color: 'white', fontSize: 18, fontWeight: 'bold' },
+  submitButtonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '600',
+  },
 });
+
 
 export default PostItemScreen;

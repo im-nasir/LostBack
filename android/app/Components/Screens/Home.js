@@ -100,7 +100,7 @@ const Home = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
+      <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', backgroundColor:'#8A4FFF', paddingRight: 20}}>
       <View style={styles.header}>
         <Image
           style={styles.profileImage}
@@ -109,6 +109,14 @@ const Home = ({ navigation, route }) => {
           }
         />
         <Text style={styles.headerText}>Hi, {userName}</Text>
+      </View>
+      
+        <TouchableOpacity>
+                <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
+                <Icon name="paper-plane" size={23} color="#FFF" />
+
+                </View>
+         </TouchableOpacity>
       </View>
 
       {/* Posts */}
@@ -170,15 +178,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#8A4FFF', // No background color
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.2)', // Subtle border
-    backdropFilter: 'blur(15px)', // Blur effect
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 5, // For Android shadow
+    // backgroundColor: '#8A4FFF', // No background color
+    // borderBottomWidth: 1,
+    // borderBottomColor: 'rgba(255, 255, 255, 0.2)', // Subtle border
+    // backdropFilter: 'blur(15px)', // Blur effect
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 4 },
+    // shadowOpacity: 0.05,
+    // shadowRadius: 10,
+    // elevation: 5, // For Android shadow
   },
 
 

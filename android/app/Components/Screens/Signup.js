@@ -75,12 +75,12 @@ export default function Signup({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.SignupHeader}>
-        <LinearGradient
-          colors={['#E5D8FF', '#C4AFFF', '#8A4FFF', '#5F32CC', '#3B1F7F']}
-          style={styles.linearGradient}>
+        <View  style={styles.linearGradient}>
+       
           <Text style={styles.HeadText}>SignUp to your Account</Text>
           <Text style={styles.HeadSubtext}>Create a new account</Text>
-        </LinearGradient>
+        </View>
+        
       </View>
 
       <View style={styles.inputView}>
@@ -232,10 +232,12 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   SignupHeader: {
-    backgroundColor: '#1C1C1C',
+    backgroundColor: '#8A4FFF',
     width: '100%',
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
+    alignItems: 'flex-start', // Fixed
+    paddingVertical: 10,
   },
   linearGradient: {
     borderBottomLeftRadius: 8,

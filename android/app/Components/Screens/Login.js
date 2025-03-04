@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-end',
+    paddingBottom: '8%',
   },
   line: {
     flex: 1,
@@ -201,4 +202,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 10,
   },
+  
 });

@@ -4,11 +4,10 @@ import {
   Text,
   View,
   Image,
-  ImageBackground,
   TouchableOpacity,
 } from 'react-native';
 
-const Screen1 = ({ navigation }) => {
+const Screen3 = ({ navigation }) => {
   const [currentPage, setCurrentPage] = useState(3);
 
   const handlePageChange = (page) => {
@@ -40,9 +39,6 @@ const Screen1 = ({ navigation }) => {
       </TouchableOpacity>
       </View>
         
-       
-      
-     
       <View style={styles.nextProg}>
         <Text
           style={{
@@ -80,22 +76,20 @@ const Screen1 = ({ navigation }) => {
   );
 };
 
-export default Screen1;
+export default Screen3;
 
 const styles = StyleSheet.create({
- 
   view: { 
     flex: 1, 
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor: '#FFFFFF' },
-  
+    backgroundColor: '#FFFFFF' 
+  },
   textView:{
     flex:1,
     alignItems:'center',
     justifyContent:'center'
   },
-
   text1: {
     fontSize: 24,
     textAlign: 'center',
@@ -104,14 +98,11 @@ const styles = StyleSheet.create({
     marginBottom:'12%',
     paddingLeft:'4%',
     paddingRight:'4%'
-    
   },
-  
   nextBtnView:{
     flex:1,
     justifyContent:'flex-end',
     paddingBottom:'2%'
-
   },
   btnnext: {
     height: 70,
@@ -120,13 +111,12 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     borderWidth: 5,
     borderColor: '#8A4FFF',
-
   },
   btnimg:{
-  alignSelf:'center',
-  marginTop:'33%',
-  height:'35%',
-  width:'35%'
+    alignSelf:'center',
+    marginTop:'33%',
+    height:'35%',
+    width:'35%'
   },
   ImageView:{
     flex:1,
@@ -136,13 +126,11 @@ const styles = StyleSheet.create({
     paddingRight:'4%'
   },
   Image1:{
-   marginTop:'16',
-    
+    marginTop:'16',
   },
   nextProg:{
-  flexDirection: 'row', 
-  alignSelf: 'center', 
-  paddingBottom:'4'
-   }
-  
+    flexDirection: 'row', 
+    alignSelf: 'center', 
+    paddingBottom:'4'
+  }
 });

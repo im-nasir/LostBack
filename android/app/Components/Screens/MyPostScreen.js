@@ -102,7 +102,7 @@ const MyPostScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Your Posts</Text>
+      <Text style={styles.heading}>MY POSTS</Text>
       {userPosts.length === 0 ? (
         <Text style={styles.noPostsText}>You have not posted anything yet.</Text>
       ) : (
@@ -184,8 +184,23 @@ const MyPostScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, alignItems: 'center', backgroundColor: '#F7F7F7' },
-  heading: { fontSize: 28, fontWeight: 'bold', marginBottom: 20, color: '#333' },
+  container: { flex: 1, padding: 8, alignItems: 'center', backgroundColor: '#F7F7F7' },
+  heading: { fontSize: 28,
+    width:'90%',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#8E44AD',
+    letterSpacing: 1,
+    marginTop: 16,
+    marginBottom: 16,
+    
+    textShadowRadius: 3,
+    backgroundColor: '#EDE7F6',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    overflow: 'hidden', },
+
   noPostsText: { fontSize: 16, color: '#555' },
   postCard: {
     backgroundColor: '#fff',
